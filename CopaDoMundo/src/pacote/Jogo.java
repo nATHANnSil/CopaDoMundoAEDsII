@@ -1,13 +1,12 @@
 package pacote;
-//ATRIBUTOS
 
+//ATRIBUTOS
 public class Jogo {
 	private int dia, mes, ano, placarSelecao1, placarSelecao2;
 	private String etapa, selecao1, selecao2, local;
 
-//CONSTRUTORES SAO PUBLIC POR PADR�O
-//USAR THIS.
-
+	// CONSTRUTORES SAO PUBLIC POR PADRÃO
+	// USAR THIS.
 	Jogo(int dia, int mes) {
 		this.dia = dia;
 		this.mes = mes;
@@ -18,7 +17,7 @@ public class Jogo {
 
 	}
 
-// GETS E SETS PARA CADA VARIAVEL
+	// GETS E SETS PARA CADA VARIAVEL
 
 	public int getdia() {
 		return this.dia;
@@ -92,8 +91,7 @@ public class Jogo {
 		this.local = local;
 	}
 
-// CLONE, LER E IMPRIMIR
-
+	// CLONE
 	public Jogo cloneJogo() {
 		Jogo novoJogo = new Jogo();
 		novoJogo.dia = this.dia;
@@ -109,15 +107,18 @@ public class Jogo {
 		return novoJogo;
 	}
 
+	// LER
 	public void ler() {
 		MyIO.readInt();
 		MyIO.readString();
 
 	}
 
+	// IMPRIMIR
 	public void imprimir() {
-
+		System.out.println("[COPA " + this.ano + "] [" + this.etapa + "] [" + this.dia + "/" + this.mes + "] ["
+				+ this.selecao1 + "(" + this.placarSelecao1 + ") x (" + this.placarSelecao2 + ")" + this.selecao2 + "]"
+				+ "[" + this.local + "]");
 	}
 
 }
-
