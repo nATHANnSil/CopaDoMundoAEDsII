@@ -116,9 +116,7 @@ public class Jogo {
 
 	// IMPRIMIR
 	public void imprimir() {
-		System.out.println("[COPA " + this.ano + "] [" + this.etapa + "] [" + this.dia + "/" + this.mes + "] ["
-				+ this.selecao1 + "(" + this.placarSelecao1 + ") x (" + this.placarSelecao2 + ")" + this.selecao2 + "]"
-				+ "[" + this.local + "]");
+		System.out.println("[COPA " + this.ano + "] [" + this.etapa + "] [" + this.dia + "/" + this.mes + "] ["+ this.selecao1 + "(" + this.placarSelecao1 + ") x (" + this.placarSelecao2 + ")" + this.selecao2 + "]" + "[" + this.local + "]");
 	}
 
 }
