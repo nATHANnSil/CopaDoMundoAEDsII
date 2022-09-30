@@ -7,10 +7,16 @@ public class Jogo {
 
 	// CONSTRUTORES SAO PUBLIC POR PADRÃO
 	// USAR THIS.
-	Jogo(int dia, int mes) {
+	Jogo(int ano, String etapa, int dia, int mes, String selecao1, int placarSelecao1, int placarSelecao2, String selecao2, String local) {
 		this.dia = dia;
 		this.mes = mes;
-
+		this.ano = ano;
+		this.placarSelecao1 = placarSelecao1;
+		this.placarSelecao2 = placarSelecao2;
+		this.etapa = etapa;
+		this.selecao1 = selecao1;
+		this.selecao2 = selecao2;
+		this.local = local;
 	}
 
 	public Jogo() {
@@ -108,10 +114,12 @@ public class Jogo {
 	}
 
 	// LER
-	public void ler() {
-		MyIO.readInt();
-		MyIO.readString();
-
+	public Jogo ler() {
+		String leitura = MyIO.readLine();
+		String linhas[] = leitura.split("#");
+		Jogo jogo = new Jogo(Integer.parseInt(linhas[0]),linhas[1],Integer.parseInt(linhas[2]),Integer.parseInt(linhas[3]),linhas[4],Integer.parseInt(linhas[5]),Integer.parseInt(linhas[6]),linhas[7],linhas[8]);
+		
+		return jogo;
 	}
 
 	// IMPRIMIR
