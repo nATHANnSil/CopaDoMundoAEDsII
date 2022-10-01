@@ -7,7 +7,8 @@ public class Jogo {
 
 	// CONSTRUTORES SAO PUBLIC POR PADRÃO
 	// USAR THIS.
-	Jogo(int ano, String etapa, int dia, int mes, String selecao1, int placarSelecao1, int placarSelecao2, String selecao2, String local) {
+	Jogo(int ano, String etapa, int dia, int mes, String selecao1, int placarSelecao1, int placarSelecao2,
+			String selecao2, String local) {
 		this.dia = dia;
 		this.mes = mes;
 		this.ano = ano;
@@ -25,75 +26,75 @@ public class Jogo {
 
 	// GETS E SETS PARA CADA VARIAVEL
 
-	public int getdia() {
+	public int getDia() {
 		return this.dia;
 	}
 
-	public void setdia(int dia) {
+	public void setDia(int dia) {
 		this.dia = dia;
 	}
 
-	public int getmes() {
+	public int getMes() {
 		return this.mes;
 	}
 
-	public void setmes(int mes) {
+	public void setMes(int mes) {
 		this.mes = mes;
 	}
 
-	public int getano() {
+	public int getAno() {
 		return this.ano;
 	}
 
-	public void setano(int ano) {
+	public void setAno(int ano) {
 		this.ano = ano;
 	}
 
-	public int getplacarSelecao1() {
+	public int getPlacarSelecao1() {
 		return this.placarSelecao1;
 	}
 
-	public void setplacarSelecao1(int placarSelecao1) {
+	public void setPlacarSelecao1(int placarSelecao1) {
 		this.placarSelecao1 = placarSelecao1;
 	}
 
-	public int getplacarSelecao2() {
+	public int getPlacarSelecao2() {
 		return this.placarSelecao2;
 	}
 
-	public void setplacarSelecao2(int placarSelecao2) {
+	public void setPlacarSelecao2(int placarSelecao2) {
 		this.placarSelecao2 = placarSelecao2;
 	}
 
-	public String getetapa() {
+	public String getEtapa() {
 		return this.etapa;
 	}
 
-	public void setetapa(String etapa) {
+	public void setEtapa(String etapa) {
 		this.etapa = etapa;
 	}
 
-	public String getselecao1() {
+	public String getSelecao1() {
 		return this.selecao1;
 	}
 
-	public void setselecao1(String selecao1) {
+	public void setSelecao1(String selecao1) {
 		this.selecao1 = selecao1;
 	}
 
-	public String getselecao2() {
+	public String getSelecao2() {
 		return this.selecao2;
 	}
 
-	public void setselecao2(String selecao2) {
+	public void setSelecao2(String selecao2) {
 		this.selecao2 = selecao2;
 	}
 
-	public String getlocal() {
+	public String getLocal() {
 		return this.local;
 	}
 
-	public void setlocal(String local) {
+	public void setLocal(String local) {
 		this.local = local;
 	}
 
@@ -116,14 +117,17 @@ public class Jogo {
 	// LER
 	public Jogo ler(String leitura) {
 		String linhas[] = leitura.split("#");
-		Jogo jogo = new Jogo(Integer.parseInt(linhas[0]),linhas[1],Integer.parseInt(linhas[2]),Integer.parseInt(linhas[3]),linhas[4],Integer.parseInt(linhas[5]),Integer.parseInt(linhas[6]),linhas[7],linhas[8]);
-		
+		Jogo jogo = new Jogo(Integer.parseInt(linhas[0]), linhas[1], Integer.parseInt(linhas[2]),
+				Integer.parseInt(linhas[3]), linhas[4], Integer.parseInt(linhas[5]), Integer.parseInt(linhas[6]),
+				linhas[7], linhas[8]);
+
 		return jogo;
 	}
 
 	// IMPRIMIR
 	public void imprimir() {
-		System.out.println("[COPA " + this.ano + "] [" + this.etapa + "] [" + this.dia + "/" + this.mes + "] ["+ this.selecao1 + "(" + this.placarSelecao1 + ") x (" + this.placarSelecao2 + ")" + this.selecao2 + "]" + "[" + this.local + "]");
+		System.out.println("[COPA " + this.ano + "] [" + this.etapa + "] [" + this.dia + "/" + this.mes + "] ["
+				+ this.selecao1 + "(" + this.placarSelecao1 + ") x (" + this.placarSelecao2 + ")" + this.selecao2 + "]" + "[" + this.local + "]");
 	}
 
 }
