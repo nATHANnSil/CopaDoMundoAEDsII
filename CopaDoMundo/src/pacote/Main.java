@@ -14,25 +14,19 @@ public class Main {
 
 		while(!entrada.equals("FIM")){
 			Jogo jogo2 = new Jogo();
-			vetor[i++] = jogo2.ler();
+			vetor[i++] = jogo2.ler(entrada);
 			entrada = MyIO.readLine();
 		}
 
 		entrada = MyIO.readLine();
+                int quantidade = Integer.parseInt(entrada);
 
-
-		for(int a = 0; a < Integer.parseInt(entrada); a++){
+		for(int a = 0; a < quantidade; a++){
 			entrada = MyIO.readLine();
-			//18/6/1974;Brasil
 			String data = entrada.split(";")[0];
-			//["18/6/1974", "Brasil"]
-			//data = "18/6/1974"
 			String selecao1 = entrada.split(";")[1];
-			//selecao1 = "Brasil"
 			int dia = Integer.parseInt(data.split("/")[0]);
-			//data = ["18", "6", "1974"]
 			int mes = Integer.parseInt(data.split("/")[1]);
-
 			int ano = Integer.parseInt(data.split("/")[2]);
 
 			for (int w = 0; w < i; w++){
