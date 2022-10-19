@@ -1,5 +1,6 @@
 package pacote;
 
+
 //ATRIBUTOS
 public class Jogo {
 	private int dia, mes, ano, placarSelecao1, placarSelecao2;
@@ -115,7 +116,7 @@ public class Jogo {
 	}
 
 	// LER
-	public Jogo ler(String leitura) {
+	public Jogo lerJogo(String leitura) {
 		String linhas[] = leitura.split("#");
 		Jogo jogo = new Jogo(Integer.parseInt(linhas[0]), linhas[1], Integer.parseInt(linhas[2]),
 				Integer.parseInt(linhas[3]), linhas[4], Integer.parseInt(linhas[5]), Integer.parseInt(linhas[6]),
