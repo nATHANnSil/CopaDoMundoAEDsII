@@ -1,1 +1,374 @@
 
+import java.io.BufferedReader;
+import java.io.EOFException;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+class ArquivoTextoLeitura {
+
+	private BufferedReader entrada;
+	
+	ArquivoTextoLeitura(String nomeArquivo) {	
+		
+		try {
+			entrada = new BufferedReader(new FileReader(nomeArquivo));
+		}
+		catch (FileNotFoundException excecao) {
+			System.out.println("Arquivo nao encontrado");
+		}
+	}
+	
+	public void fecharArquivo() {
+		
+		try {
+			entrada.close();
+		}
+		catch (IOException excecao) {
+			System.out.println("Erro no fechamento do arquivo de leitura: " + excecao);	
+		}
+	}
+	
+	@SuppressWarnings("finally")
+	public String lerArquivo() {
+		
+		String textoEntrada = null;
+		
+		try {
+			textoEntrada = entrada.readLine();
+		}
+		catch (EOFException excecao) { //Excecao de final de arquivo.
+			textoEntrada = null;
+		}
+		catch (IOException excecao) {
+			System.out.println("Erro de leitura: " + excecao);
+			textoEntrada = null;
+		}
+		finally {
+			return textoEntrada;
+		}
+	}
+}
+
+public class Main {
+	public static void metodoLeitura(Jogo[] vetor) {
+		ArquivoTextoLeitura file = new ArquivoTextoLeitura("src/partidas.txt");
+
+		String dados = file.lerArquivo();
+
+		int i = 0;
+
+		while (dados != null) {
+			Jogo jogo2 = new Jogo();
+			vetor[i++] = jogo2.lerJogo(dados);
+			dados = file.lerArquivo();
+		}
+
+		file.fecharArquivo();
+
+	}
+	
+
+	public static void main(String[] args) throws Exception {
+
+		MyIO.setCharset("UTF-8");
+
+		ABB arvoredeJogos = new ABB();
+
+		Jogo vetor[] = new Jogo[1000];
+
+		metodoLeitura(vetor);
+
+		String entrada;
+
+		entrada = MyIO.readLine();
+
+		while (!entrada.equals("FIM")) {
+			String data = entrada.split(";")[0];
+			String selecao1 = entrada.split(";")[1];
+			int dia = Integer.parseInt(data.split("/")[0]);
+			int mes = Integer.parseInt(data.split("/")[1]);
+			int ano = Integer.parseInt(data.split("/")[2]);
+
+			for (int w = 0; w < 900; w++) {
+				if (vetor[w].getDia() == dia && vetor[w].getMes() == mes && vetor[w].getAno() == ano
+						&& vetor[w].getSelecao1().equals(selecao1)) {
+					arvoredeJogos.inserir(vetor[w]);
+				}
+
+			}
+
+			entrada = MyIO.readLine();
+		}
+		entrada = MyIO.readLine();
+
+		while (!entrada.equals("FIM")) {
+			String data = entrada.split(";")[0];
+			String selecao1 = entrada.split(";")[1];
+			int dia = Integer.parseInt(data.split("/")[0]);
+			int mes = Integer.parseInt(data.split("/")[1]);
+			int ano = Integer.parseInt(data.split("/")[2]);
+
+			for (int w = 0; w < 900; w++) {
+				if (vetor[w].getDia() == dia && vetor[w].getMes() == mes && vetor[w].getAno() == ano
+						&& vetor[w].getSelecao1().equals(selecao1)) {
+					arvoredeJogos.pesquisar(vetor[w]);
+				}
+
+			}
+
+			entrada = MyIO.readLine();
+		}
+	}
+
+}
+
+//ATRIBUTOS
+class Jogo {
+
+	private int dia, mes, ano, placarSelecao1, placarSelecao2;
+	private String etapa, selecao1, selecao2, local;
+
+	// CONSTRUTORES SAO PUBLIC POR PADRÃO
+	// USAR THIS.
+	Jogo(int ano, String etapa, int dia, int mes, String selecao1, int placarSelecao1, int placarSelecao2,
+			String selecao2, String local) {
+		this.dia = dia;
+		this.mes = mes;
+		this.ano = ano;
+		this.placarSelecao1 = placarSelecao1;
+		this.placarSelecao2 = placarSelecao2;
+		this.etapa = etapa;
+		this.selecao1 = selecao1;
+		this.selecao2 = selecao2;
+		this.local = local;
+	}
+
+	public Jogo() {
+
+	}
+
+	// GETS E SETS PARA CADA VARIAVEL
+	public int getDia() {
+		return this.dia;
+	}
+
+	public void setDia(int dia) {
+		this.dia = dia;
+	}
+
+	public int getMes() {
+		return this.mes;
+	}
+
+	public void setMes(int mes) {
+		this.mes = mes;
+	}
+
+	public int getAno() {
+		return this.ano;
+	}
+
+	public void setAno(int ano) {
+		this.ano = ano;
+	}
+
+	public int getPlacarSelecao1() {
+		return this.placarSelecao1;
+	}
+
+	public void setPlacarSelecao1(int placarSelecao1) {
+		this.placarSelecao1 = placarSelecao1;
+	}
+
+	public int getPlacarSelecao2() {
+		return this.placarSelecao2;
+	}
+
+	public void setPlacarSelecao2(int placarSelecao2) {
+		this.placarSelecao2 = placarSelecao2;
+	}
+
+	public String getEtapa() {
+		return this.etapa;
+	}
+
+	public void setEtapa(String etapa) {
+		this.etapa = etapa;
+	}
+
+	public String getSelecao1() {
+		return this.selecao1;
+	}
+
+	public void setSelecao1(String selecao1) {
+		this.selecao1 = selecao1;
+	}
+
+	public String getSelecao2() {
+		return this.selecao2;
+	}
+
+	public void setSelecao2(String selecao2) {
+		this.selecao2 = selecao2;
+	}
+
+	public String getLocal() {
+		return this.local;
+	}
+
+	public void setLocal(String local) {
+		this.local = local;
+	}
+
+	// CLONE
+	public Jogo cloneJogo() {
+		Jogo novoJogo = new Jogo();
+		novoJogo.dia = this.dia;
+		novoJogo.mes = this.mes;
+		novoJogo.ano = this.ano;
+		novoJogo.placarSelecao1 = this.placarSelecao1;
+		novoJogo.placarSelecao2 = this.placarSelecao2;
+		novoJogo.etapa = this.etapa;
+		novoJogo.selecao1 = this.selecao1;
+		novoJogo.selecao2 = this.selecao2;
+		novoJogo.local = this.local;
+
+		return novoJogo;
+	}
+
+	// LER
+	public Jogo lerJogo(String leitura) {
+		String linhas[] = leitura.split("#");
+		Jogo jogo = new Jogo(Integer.parseInt(linhas[0]), linhas[1], Integer.parseInt(linhas[2]),
+				Integer.parseInt(linhas[3]), linhas[4], Integer.parseInt(linhas[5]), Integer.parseInt(linhas[6]),
+				linhas[7], linhas[8]);
+
+		return jogo;
+	}
+
+	// IMPRIMIR
+	public void imprimir() {
+		System.out.println("[COPA " + this.ano + "] [" + this.etapa + "] [" + this.dia + "/" + this.mes + "] ["
+				+ this.selecao1 + " (" + this.placarSelecao1 + ") x (" + this.placarSelecao2 + ") " + this.selecao2
+				+ "] [" + this.local + "]");
+	}
+
+	public boolean comparar(Jogo jogo) { // comparar objeto com objeto externo
+		if (ano < jogo.getAno()) {
+			return true;
+		} else if (ano == jogo.getAno()) {
+			if (mes < jogo.getMes()) {
+				return true;
+			} else if (mes == jogo.getMes()) {
+				if (dia < jogo.getDia()) {
+					return true;
+				} else if (dia == jogo.getDia()) {
+					if (selecao1.compareTo(jogo.getSelecao1()) < 0) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+}
+
+class No {
+
+	Jogo item;
+	No esquerda;
+	No direita;
+
+	public No(Jogo elemento) {
+
+		item = elemento;
+		esquerda = direita = null;
+	}
+
+	public No() {
+
+		item = new Jogo();
+		esquerda = direita = null;
+	}
+}
+
+class ABB {
+
+	private No raiz;
+
+	public ABB() {
+		raiz = null;
+	}
+
+	public boolean arvoreVazia() {
+
+		boolean resp;
+
+		if (raiz == null)
+			resp = true;
+		else
+			resp = false;
+
+		return resp;
+	}
+
+	public Jogo pesquisar(Jogo chave) {
+		return pesquisar(chave, raiz);
+	}
+
+	private Jogo pesquisar(Jogo chave, No raizArvore) {
+
+		Jogo pesquisado;
+
+		if (raizArvore == null) {// imprime quando a raiz é nula
+			pesquisado = null;
+			System.out.println("NAO");
+		} else {
+			System.out.print("[" + raizArvore.item.getDia() + "/" + raizArvore.item.getMes() + "/"
+					+ raizArvore.item.getAno() + ";" + raizArvore.item.getSelecao1() + "] - ");
+			if (raizArvore.item.equals(chave)) {
+				pesquisado = raizArvore.item;
+				System.out.println("SIM");
+			} else if (chave.comparar(raizArvore.item))
+				pesquisado = pesquisar(chave, raizArvore.esquerda);
+			else
+				pesquisado = pesquisar(chave, raizArvore.direita);
+		}
+
+		return pesquisado;
+	}
+
+	public void inserir(Jogo novo) throws Exception {
+		raiz = inserir(novo, raiz);
+	}
+
+	private No inserir(Jogo novo, No raizArvore) throws Exception {
+
+		if (raizArvore == null)
+			raizArvore = new No(novo);
+		else {
+			if (novo.comparar(raizArvore.item))
+				raizArvore.esquerda = inserir(novo, raizArvore.esquerda);
+			else if (!novo.comparar(raizArvore.item))
+				raizArvore.direita = inserir(novo, raizArvore.direita);
+			else
+				throw new Exception("Erro ao tentar inserir na árvore: chave repetida!");
+		}
+		return raizArvore;
+	}
+
+	public void imprimirEmOrdem() {
+		imprimirEmOrdem(raiz);
+	}
+
+	private void imprimirEmOrdem(No raizArvore) {
+
+		if (raizArvore != null) {
+			imprimirEmOrdem(raizArvore.esquerda);
+			raizArvore.item.imprimir();
+			imprimirEmOrdem(raizArvore.direita);
+		}
+	}
+}
